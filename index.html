@@ -3,498 +3,311 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Record Hub - Blender Addon Documentation</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Rounded:wght@400;700&display=swap" rel="stylesheet" />
+  <title>Record Hub - Documentation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --primary-color: #667eea;
+      --primary: #667eea;
       --primary-light: #e0e7ff;
       --green: #10b981;
       --orange: #f59e0b;
       --purple: #8b5cf6;
-      --red: #ef4444;
-      --surface-color: #ffffff;
-      --background-color: #f9fafb;
-      --text-color: #1f2937;
-      --border-color: #e5e7eb;
-      --hover-color: #f3f4f6;
-      --active-color: #ddd6fe;
-      --corner-radius: 16px;
+      --surface: #ffffff;
+      --bg: #f9fafb;
+      --text: #1f2937;
+      --border: #e5e7eb;
+      --hover: #f3f4f6;
+      --radius: 12px;
     }
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      margin: 0;
-      font-family: 'Roboto Rounded', Arial, sans-serif;
+      font-family: 'Inter', sans-serif;
       display: flex;
       min-height: 100vh;
-      background: var(--background-color);
-      color: var(--text-color);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.6;
     }
     nav {
-      width: 260px;
-      background: var(--surface-color);
-      border-right: 2px solid var(--border-color);
+      width: 220px;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
       position: sticky;
       top: 0;
       height: 100vh;
       overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      padding: 1.5rem 1rem;
+      padding: 1.5rem 0.75rem;
     }
     nav h2 {
-      margin: 0 0 1.5rem 1rem;
+      font-size: 1.3rem;
+      color: var(--primary);
+      margin: 0 0 1rem 0.75rem;
       font-weight: 700;
-      font-size: 1.5rem;
-      color: var(--primary-color);
-      letter-spacing: 0.02em;
     }
-    nav ul {
-      list-style: none;
-      margin: 0 0.5rem;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-    nav li {
-      border-radius: var(--corner-radius);
-    }
+    nav ul { list-style: none; display: flex; flex-direction: column; gap: 0.3rem; }
     nav button {
       background: none;
       border: none;
-      padding: 0.85rem 1.3rem;
+      padding: 0.7rem 1rem;
       width: 100%;
-      color: var(--text-color);
-      font-size: 1.05rem;
-      border-radius: var(--corner-radius);
+      color: var(--text);
+      font-size: 0.95rem;
+      border-radius: var(--radius);
       cursor: pointer;
-      transition: all 0.2s;
-      font-family: 'Roboto Rounded', Arial, sans-serif;
+      transition: all 0.15s;
+      font-family: inherit;
       font-weight: 500;
       text-align: left;
     }
-    nav button:hover {
-      background: var(--hover-color);
-      color: var(--primary-color);
-      transform: translateX(4px);
-    }
+    nav button:hover { background: var(--hover); color: var(--primary); }
     nav button.active {
       background: var(--primary-light);
-      color: var(--primary-color);
+      color: var(--primary);
       font-weight: 700;
-      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
     }
     main {
       flex: 1;
-      padding: 2.5rem 3rem;
-      background: var(--background-color);
+      padding: 2rem 2.5rem;
+      max-width: 900px;
       overflow-y: auto;
     }
-    main h1 {
-      font-size: 2.4rem;
+    h1 {
+      font-size: 2rem;
       font-weight: 700;
-      color: var(--primary-color);
-      margin-bottom: 1.2rem;
-      border-radius: var(--corner-radius);
-      padding: 0.6rem 1.3rem;
-      background: var(--primary-light);
-      display: inline-block;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
     }
-    main h2 {
-      font-size: 1.6rem;
+    h2 {
+      font-size: 1.4rem;
       color: var(--green);
-      margin-top: 2rem;
-      margin-bottom: 0.8rem;
+      margin: 2rem 0 0.75rem;
       font-weight: 700;
     }
-    main h3 {
-      font-size: 1.25rem;
+    h3 {
+      font-size: 1.1rem;
       color: var(--purple);
-      margin-top: 1.5rem;
-      margin-bottom: 0.6rem;
+      margin: 1.5rem 0 0.5rem;
       font-weight: 600;
     }
-    main p {
-      font-size: 1.1rem;
-      line-height: 1.75;
-      margin-bottom: 1.3rem;
-      max-width: 800px;
-    }
-    main ul {
-      font-size: 1.1rem;
-      line-height: 1.75;
-      margin-bottom: 1.5rem;
-      max-width: 800px;
-      padding-left: 1.5rem;
-    }
-    main ol {
-      font-size: 1.1rem;
-      line-height: 1.75;
-      margin-bottom: 1.5rem;
-      max-width: 800px;
-      padding-left: 1.5rem;
-    }
-    main ul li, main ol li {
-      margin-bottom: 0.7rem;
-    }
-    main code {
-      background: var(--hover-color);
-      padding: 0.25rem 0.6rem;
-      border-radius: 6px;
+    p { margin-bottom: 1rem; }
+    ul, ol { margin: 0.75rem 0 1rem 1.5rem; }
+    li { margin-bottom: 0.4rem; }
+    code {
+      background: var(--hover);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
       font-family: 'Courier New', monospace;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: var(--purple);
     }
-    .feature-box {
-      background: var(--surface-color);
-      border: 2px solid var(--border-color);
-      border-radius: var(--corner-radius);
-      padding: 1.5rem;
-      margin: 1.5rem 0;
-      max-width: 800px;
+    .box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
     }
-    .feature-box h3 {
-      margin-top: 0;
-      color: var(--orange);
-    }
-    .warning-box {
-      background: #fef3c7;
-      border-left: 4px solid var(--orange);
-      border-radius: 8px;
-      padding: 1rem 1.5rem;
-      margin: 1.5rem 0;
-      max-width: 800px;
-    }
-    .tip-box {
+    .box h3 { margin-top: 0; color: var(--orange); }
+    .tip {
       background: #d1fae5;
-      border-left: 4px solid var(--green);
-      border-radius: 8px;
-      padding: 1rem 1.5rem;
-      margin: 1.5rem 0;
-      max-width: 800px;
+      border-left: 3px solid var(--green);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+      font-size: 0.95rem;
     }
-    main img, main video {
-      max-width: 750px;
-      width: 100%;
-      border-radius: var(--corner-radius);
-      background: var(--surface-color);
-      display: block;
-      margin: 1.5rem 0;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    .warn {
+      background: #fef3c7;
+      border-left: 3px solid var(--orange);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+      font-size: 0.95rem;
     }
     .badge {
       display: inline-block;
-      padding: 0.3rem 0.8rem;
+      padding: 0.25rem 0.65rem;
       border-radius: 20px;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 700;
-      margin: 0.2rem;
-    }
-    .badge-mode {
       background: var(--purple);
       color: white;
+      margin-right: 0.5rem;
     }
-    @media (max-width: 900px) {
-      nav {
-        width: 220px;
-      }
-      main {
-        padding: 1.5rem;
-      }
-    }
-    @media (max-width: 700px) {
-      body {
-        flex-direction: column;
-      }
-      nav {
-        width: 100%;
-        height: auto;
-        position: static;
-        border-right: none;
-        border-bottom: 2px solid var(--border-color);
-      }
+    strong { font-weight: 600; }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    @media (max-width: 768px) {
+      body { flex-direction: column; }
+      nav { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border); }
+      main { padding: 1.5rem; }
     }
   </style>
 </head>
 <body>
   <nav>
-    <h2>🎬 Record Hub</h2>
+    <h2>📹 Record Hub</h2>
     <ul>
-      <li><button class="active" onclick="showSection('installation')">Installation</button></li>
-      <li><button onclick="showSection('overview')">Overview</button></li>
-      <li><button onclick="showSection('quickstart')">Quick Start</button></li>
-      <li><button onclick="showSection('troubleshooting')">Troubleshooting</button></li>
+      <li><button class="active" onclick="show('install')">Install</button></li>
+      <li><button onclick="show('modes')">Modes</button></li>
+      <li><button onclick="show('guide')">Guide</button></li>
+      <li><button onclick="show('help')">Help</button></li>
     </ul>
   </nav>
   
   <main>
-    <!-- INSTALLATION -->
-    <section id="installation" style="display:block;">
+    <!-- INSTALL -->
+    <section id="install" style="display:block;">
       <h1>Installation</h1>
       
-      <h2>Step 1: Download</h2>
-      <p>Download the <code>record_hub.py</code> file or ZIP archive from the GitHub repository.</p>
-      
-      <h2>Step 2: Install in Blender</h2>
+      <h2>Install Addon</h2>
       <ol>
-        <li>Open Blender and go to <b>Edit → Preferences → Add-ons</b></li>
-        <li>Click <b>Install...</b> button at the top</li>
-        <li>Navigate to and select the downloaded file</li>
-        <li>Enable the addon by checking the checkbox next to "3D View: Record Hub"</li>
+        <li>Download <code>record_hub.py</code></li>
+        <li>Blender → Edit → Preferences → Add-ons</li>
+        <li>Click Install, select file</li>
+        <li>Enable "3D View: Record Hub"</li>
+        <li>Find panel in viewport sidebar (press <code>N</code>) → Recordhub tab</li>
       </ol>
       
-      <h2>Step 3: Access the Panel</h2>
-      <p>Find the addon panel in the 3D Viewport sidebar (press <code>N</code> key) under the <b>"Timelapse"</b> tab.</p>
-      
-      <div class="tip-box">
-        <strong>💡 Tip:</strong> For video export functionality, make sure FFmpeg is installed on your system or provide the path to the FFmpeg executable in the settings.
-      </div>
-      
-      <h2>FFmpeg Installation</h2>
-      <p>FFmpeg is required for video encoding. Download it from <a href="https://ffmpeg.org/download.html" target="_blank">ffmpeg.org</a> and either:</p>
+      <h2>Install FFmpeg</h2>
+      <p>Required for video export. Download from <a href="https://ffmpeg.org" target="_blank">ffmpeg.org</a></p>
       <ul>
-        <li>Add FFmpeg to your system PATH (recommended), or</li>
-        <li>Specify the full path in Settings → FFmpeg Path</li>
+        <li>Add to system PATH, or</li>
+        <li>Set path in Settings → FFmpeg</li>
       </ul>
+      
+      <div class="tip">
+        <strong>💡 Tip:</strong> Test FFmpeg in terminal: <code>ffmpeg -version</code>
+      </div>
     </section>
 
-    <!-- OVERVIEW -->
-    <section id="overview" style="display:none;">
-      <h1>Overview</h1>
-      <p>Record Hub is an automated viewport recording addon for Blender that captures smooth camera movements around your 3D scenes and exports them as timelapse videos.</p>
+    <!-- MODES -->
+    <section id="modes" style="display:none;">
+      <h1>Operating Modes</h1>
       
-      <h2>✨ Key Features</h2>
-      <ul>
-        <li><b>Three Operating Modes:</b> Orbit, Ping-Pong, and Follow Me</li>
-        <li><b>Smart Tracking:</b> Follow selected objects or entire scenes</li>
-        <li><b>Automatic Recording:</b> Continuous viewport capture at 60 FPS</li>
-        <li><b>Video Export:</b> Create timelapse and/or realtime videos</li>
-        <li><b>Customizable Settings:</b> Speed, smoothness, and quality controls</li>
-      </ul>
-      
-      <h2>🎯 Operating Modes</h2>
-      
-      <div class="feature-box">
-        <h3><span class="badge badge-mode">Orbit</span> Continuous Rotation</h3>
-        <p>Smooth 360° rotation around the Z-axis (vertical). Perfect for showcasing 3D models and scenes from all angles.</p>
+      <div class="box">
+        <h3><span class="badge">Orbit</span>Continuous 360°</h3>
+        <p>Smooth rotation around Z-axis. Perfect for showcasing models.</p>
         <ul>
-          <li>Adjustable rotation speed (1-90°/sec)</li>
+          <li>Speed: 0.1-90°/sec</li>
           <li>Optional selection tracking</li>
-          <li>Auto-zoom based on object size</li>
+          <li>Auto-zoom (10-300%)</li>
         </ul>
       </div>
       
-      <div class="feature-box">
-        <h3><span class="badge badge-mode">Ping-Pong</span> Back & Forth</h3>
-        <p>Back-and-forth rotation within a defined range. Great for dramatic reveals and focused showcases.</p>
+      <div class="box">
+        <h3><span class="badge">Ping-Pong</span>Back & Forth</h3>
+        <p>Rotates within defined range. Great for reveals.</p>
         <ul>
-          <li>Adjustable range (10-360°)</li>
-          <li>Multiple easing options (Linear, Ease In/Out, Sine Wave)</li>
-          <li>Smooth direction transitions</li>
+          <li>Range: 10-360°</li>
+          <li>5 easing modes</li>
+          <li>Smooth transitions</li>
         </ul>
       </div>
       
-      <div class="feature-box">
-        <h3><span class="badge badge-mode">Follow Me</span> Viewport Following</h3>
-        <p>Monitors other viewports and follows your camera movements after a delay. Perfect for recording your modeling process!</p>
+      <div class="box">
+        <h3><span class="badge">Follow Me</span>Viewport Copy</h3>
+        <p>Records your viewport movements with delay. Needs 2+ windows.</p>
         <ul>
-          <li>Configurable delay (0.5-10 seconds)</li>
-          <li>Smooth camera transitions</li>
-          <li>Multi-window support</li>
+          <li>Hold time: 0.1-5 sec</li>
+          <li>Travel time: 0.3-10 sec</li>
+          <li>Smooth camera paths</li>
         </ul>
-      </div>
-      
-      <div class="warning-box">
-        <strong>⚠️ Note:</strong> Follow Me mode requires at least two 3D viewport windows open - one for your work and one for recording.
       </div>
     </section>
 
-    <!-- QUICK START -->
-    <section id="quickstart" style="display:none;">
-      <h1>Quick Start</h1>
+    <!-- GUIDE -->
+    <section id="guide" style="display:none;">
+      <h1>Quick Guide</h1>
       
-      <h2>🎬 Recording Your First Timelapse</h2>
+      <h2>Recording</h2>
+      <ol>
+        <li><strong>Select mode:</strong> Orbit / Ping-Pong / Follow Me</li>
+        <li><strong>Adjust settings:</strong> Speed, smoothness, tracking</li>
+        <li><strong>Preview:</strong> Test before recording</li>
+        <li><strong>Record:</strong> Press ESC to stop</li>
+      </ol>
       
-      <h3>1. Choose Your Mode</h3>
-      <p>Select one of the three mode tabs at the top of the panel:</p>
+      <h2>Key Settings</h2>
+      <p><strong>Speed:</strong> Rotation speed (degrees/sec)</p>
+      <p><strong>Smoothness:</strong> Camera interpolation (0.01-1.0)</p>
+      <p><strong>Track Selection:</strong> Follow selected objects/faces</p>
+      <p><strong>Auto Zoom:</strong> Adjust distance automatically</p>
+      
+      <h2>Export Options</h2>
+      <p>Click Settings button:</p>
       <ul>
-        <li><b>Orbit</b> - For continuous 360° rotation</li>
-        <li><b>Ping-Pong</b> - For back-and-forth motion</li>
-        <li><b>Follow Me</b> - To record your viewport movements</li>
+        <li><strong>Mode:</strong> Timelapse (sped up) or Realtime</li>
+        <li><strong>FPS:</strong> Output frame rate (24-120)</li>
+        <li><strong>Speed:</strong> Timelapse multiplier (2-60x)</li>
+        <li><strong>Quality:</strong> Fast / Medium / High</li>
+        <li><strong>Cleanup:</strong> Auto-delete frames after export</li>
       </ul>
       
-      <h3>2. Adjust Settings</h3>
-      <p><b>Speed:</b> Controls how fast the camera rotates (degrees per second)</p>
-      <p><b>Smoothness:</b> Controls how smoothly the camera follows changes (0.01-1.0)</p>
-      
-      <div class="feature-box">
-        <h3>Track Selection (Orbit & Ping-Pong only)</h3>
-        <p>Toggle this option to control what the camera focuses on:</p>
-        <ul>
-          <li><b>Enabled:</b> Camera follows selected vertices/faces/objects</li>
-          <li><b>Disabled:</b> Camera orbits around entire object(s)</li>
-        </ul>
-        <p><b>Auto Zoom:</b> Automatically adjusts camera distance (10-300%)</p>
+      <div class="tip">
+        <strong>💡 Best Settings:</strong> Speed 2-5°/sec, Smoothness 0.2-0.4, Quality Medium
       </div>
       
-      <h3>3. Preview or Record</h3>
-      <ul>
-        <li>Click <b>Preview</b> to test your settings without recording</li>
-        <li>Click <b>Record</b> to start capturing frames</li>
-        <li>Press <code>ESC</code> to stop at any time</li>
-      </ul>
-      
-      <div class="tip-box">
-        <strong>💡 Pro Tip:</strong> Always preview your settings before recording to ensure you get the perfect shot!
-      </div>
-      
-      <h2>⚙️ Settings & Export Options</h2>
-      <p>Click the <b>Settings</b> button to access advanced options:</p>
-      
-      <h3>Output Directory</h3>
-      <p>Choose where to save recorded frames and videos. Default: <code>~/Timelapse_Recordings</code></p>
-      
-      <h3>Export Formats</h3>
-      <ul>
-        <li><b>Timelapse:</b> Sped-up version (24-120 FPS) - perfect for social media</li>
-        <li><b>Realtime:</b> Full-speed recording (24-120 FPS) - preserves original timing</li>
-      </ul>
-      <p>You can enable both formats to get two versions of your recording.</p>
-      
-      <h3>Video Quality Presets</h3>
-      <ul>
-        <li><b>Fast:</b> Quick encoding, larger file size (CRF 28)</li>
-        <li><b>Medium:</b> Balanced quality and size (CRF 23) - <i>recommended</i></li>
-        <li><b>High Quality:</b> Slower encoding, smaller file (CRF 18)</li>
-      </ul>
-      
-      <h3>Auto-Cleanup Frame Files</h3>
-      <p>Enable this to automatically delete frame images after video creation. Only enable after verifying your video exported correctly!</p>
-      
-      <h3>FFmpeg Configuration</h3>
-      <p>Specify custom FFmpeg path or leave empty to use system PATH. Status indicator shows if FFmpeg is detected.</p>
-      
-      <h2>📁 Output Files</h2>
-      <p>After recording, videos are saved with timestamped names:</p>
-      <ul>
-        <li><code>timelapse_YYYYMMDD_HHMMSS_timelapse.mp4</code></li>
-        <li><code>timelapse_YYYYMMDD_HHMMSS_fullspeed.mp4</code></li>
-      </ul>
-      
-      <h2>🎨 Best Practices</h2>
-      <ul>
-        <li>Use slower speeds (2-5°/sec) for smooth, professional results</li>
-        <li>Higher smoothness values (0.2-0.4) create more cinematic movement</li>
-        <li>Record shorter clips (30-60 seconds) for easier handling</li>
-        <li>Keep frame files until you verify the video quality</li>
-        <li>Use Medium quality for most use cases</li>
-      </ul>
+      <h2>Output Files</h2>
+      <p>Saved as: <code>recording_YYYYMMDD_HHMMSS_[mode].mp4</code></p>
+      <p>Default location: <code>~/Timelapse_Recordings</code></p>
     </section>
 
-    <!-- TROUBLESHOOTING -->
-    <section id="troubleshooting" style="display:none;">
+    <!-- HELP -->
+    <section id="help" style="display:none;">
       <h1>Troubleshooting</h1>
       
-      <h2>🔧 Common Issues</h2>
-      
-      <h3>❌ FFmpeg Not Found Error</h3>
-      <p><b>Problem:</b> Video encoding fails with "FFmpeg not found" message.</p>
-      <p><b>Solution:</b></p>
+      <h3>FFmpeg Not Found</h3>
       <ul>
-        <li>Install FFmpeg from <a href="https://ffmpeg.org/download.html" target="_blank">ffmpeg.org</a></li>
-        <li>Add FFmpeg to your system PATH, or</li>
-        <li>Specify the full path in Settings → FFmpeg Path</li>
-        <li>Verify installation by opening terminal/command prompt and typing: <code>ffmpeg -version</code></li>
+        <li>Install from <a href="https://ffmpeg.org" target="_blank">ffmpeg.org</a></li>
+        <li>Add to PATH or set in Settings</li>
+        <li>Test: <code>ffmpeg -version</code></li>
       </ul>
       
-      <h3>🖼️ No Frames Captured</h3>
-      <p><b>Problem:</b> Recording stops with 0 frames captured.</p>
-      <p><b>Solution:</b></p>
+      <h3>No Frames Captured</h3>
       <ul>
-        <li>Ensure you have a 3D viewport visible and active</li>
-        <li>Check that you have write permissions to the output folder</li>
-        <li>Verify sufficient disk space is available</li>
-        <li>Try using the default output path first</li>
+        <li>Check 3D viewport is active</li>
+        <li>Verify write permissions</li>
+        <li>Check disk space</li>
       </ul>
       
-      <h3>🎥 Choppy Video Output</h3>
-      <p><b>Problem:</b> Final video appears jerky or stutters.</p>
-      <p><b>Solution:</b></p>
+      <h3>Choppy Video</h3>
       <ul>
-        <li>Increase the Smoothness value (0.2-0.4)</li>
-        <li>Lower the rotation speed for smoother motion</li>
-        <li>Ensure your system isn't overloaded during recording</li>
-        <li>Try using a higher FPS setting for export</li>
+        <li>Increase smoothness (0.3-0.5)</li>
+        <li>Lower rotation speed</li>
+        <li>Use higher FPS</li>
       </ul>
       
-      <h3>📁 Cannot Find Recorded Files</h3>
-      <p><b>Problem:</b> Can't locate the output videos.</p>
-      <p><b>Solution:</b></p>
+      <h3>Follow Me Not Working</h3>
       <ul>
-        <li>Check the output path in Settings</li>
-        <li>Look for timestamped folders: <code>recording_YYYYMMDD_HHMMSS_frames</code></li>
-        <li>Check console for actual save location</li>
-        <li>If auto-cleanup is enabled, frames are deleted but video should remain</li>
+        <li>Need 2+ viewport windows</li>
+        <li>Hold view for full delay time</li>
+        <li>Recording window must be separate</li>
       </ul>
       
-      <h3>🔄 Follow Me Mode Not Working</h3>
-      <p><b>Problem:</b> Camera doesn't follow other viewport.</p>
-      <p><b>Solution:</b></p>
+      <h3>Performance Issues</h3>
       <ul>
-        <li>Ensure you have multiple 3D viewports open</li>
-        <li>Wait for the configured delay time (default 0.8 seconds)</li>
-        <li>Keep the view stable for the full delay period</li>
-        <li>The monitoring viewport must be different from recording viewport</li>
+        <li>Use solid shading, not rendered</li>
+        <li>Close unused apps</li>
+        <li>Record shorter clips</li>
+        <li>Reduce viewport size</li>
       </ul>
       
-      <h3>⚡ Performance Issues</h3>
-      <p><b>Problem:</b> Blender slows down or freezes during recording.</p>
-      <p><b>Solution:</b></p>
-      <ul>
-        <li>Close unused windows and applications</li>
-        <li>Reduce viewport quality (use solid shading instead of rendered)</li>
-        <li>Use smaller viewport sizes</li>
-        <li>Record in shorter segments</li>
-        <li>Ensure you have sufficient RAM available</li>
-      </ul>
-      
-      <div class="warning-box">
-        <strong>⚠️ Still Having Issues?</strong><br>
-        Check the Blender console (Window → Toggle System Console on Windows) for detailed error messages. This can provide valuable debugging information.
-      </div>
-      
-      <h2>📝 Reporting Bugs</h2>
-      <p>If you encounter a bug:</p>
-      <ol>
-        <li>Check if it's a known issue in this documentation</li>
-        <li>Note your Blender version and operating system</li>
-        <li>Copy any error messages from the console</li>
-        <li>Open an issue on the GitHub repository with complete details</li>
-      </ol>
-      
-      <div class="tip-box">
-        <strong>💡 Help Improve:</strong> Your feedback helps make this addon better! Report bugs and suggest features on GitHub.
+      <div class="warn">
+        <strong>⚠️ Still stuck?</strong> Check Blender console (Window → Toggle System Console) for errors.
       </div>
     </section>
   </main>
 
   <script>
-    function showSection(id) {
-      const sections = ["installation","overview","quickstart","troubleshooting"];
-      sections.forEach(section => {
-        const element = document.getElementById(section);
-        if(element) element.style.display = (section === id) ? "block" : "none";
+    function show(id) {
+      ['install','modes','guide','help'].forEach(s => {
+        const el = document.getElementById(s);
+        if(el) el.style.display = s === id ? 'block' : 'none';
       });
-      
-      document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
-      
-      const activeBtn = Array.from(document.querySelectorAll('nav button')).find(
-        btn => btn.textContent.toLowerCase().replace(/[^a-z]/g,'') === id
-      );
-      if(activeBtn) activeBtn.classList.add('active');
+      document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
     }
   </script>
 </body>
