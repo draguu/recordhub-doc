@@ -150,6 +150,7 @@
     <h2>📹 Record Hub</h2>
     <ul>
       <li><button class="active" onclick="show('install')">Install</button></li>
+      <li><button onclick="show('setup')">Setup</button></li>
       <li><button onclick="show('modes')">Modes</button></li>
       <li><button onclick="show('guide')">Guide</button></li>
       <li><button onclick="show('help')">Help</button></li>
@@ -182,6 +183,55 @@
       </div>
     </section>
 
+    <!-- SETUP -->
+    <section id="setup" style="display:none;">
+      <h1>Viewport Setup</h1>
+      
+      <h2>Create Recording Viewport</h2>
+      <p>The addon records from a separate viewport that follows your main workspace.</p>
+      
+      <h3>Quick Setup (Recommended)</h3>
+      <ol>
+        <li>Click <strong>"Create Recording Viewport"</strong> button in panel</li>
+        <li>A small viewport appears at bottom (20% height)</li>
+        <li>This viewport auto-copies your main view</li>
+        <li>Keep this window visible during recording</li>
+      </ol>
+      
+      <div class="tip">
+        <strong>💡 Pro Tip:</strong> The recording viewport has overlays disabled for cleaner output
+      </div>
+      
+      <h3>Manual Setup</h3>
+      <ol>
+        <li>Split your viewport: Right-click edge → Split Area</li>
+        <li>Drag to create second viewport at bottom/side</li>
+        <li>Position both viewports side-by-side or stacked</li>
+        <li>The smaller viewport will be used for recording</li>
+      </ol>
+      
+      <h2>Frame Guide Overlay</h2>
+      <p>Toggle frame guide to preview exact recording area:</p>
+      <ul>
+        <li>Click eye icon to enable/disable overlay</li>
+        <li>Shows resolution boundaries in viewport</li>
+        <li>Adjust opacity and color in panel</li>
+        <li>Helps frame your shots perfectly</li>
+      </ul>
+      
+      <h2>Cleanup</h2>
+      <p>After recording, remove extra viewport:</p>
+      <ul>
+        <li>Click <strong>"Remove Extra Viewports"</strong> button</li>
+        <li>Joins viewports back to single window</li>
+        <li>Or manually: Join Area from viewport edge menu</li>
+      </ul>
+      
+      <div class="warn">
+        <strong>⚠️ Important:</strong> Keep the recording viewport visible throughout your session. Minimizing it will stop capture.
+      </div>
+    </section>
+
     <!-- MODES -->
     <section id="modes" style="display:none;">
       <h1>Operating Modes</h1>
@@ -191,8 +241,9 @@
         <p>Smooth rotation around Z-axis. Perfect for showcasing models.</p>
         <ul>
           <li>Speed: 0.1-90°/sec</li>
-          <li>Optional selection tracking</li>
-          <li>Auto-zoom (10-300%)</li>
+          <li>Smoothness: Camera interpolation</li>
+          <li>Track selection or entire objects</li>
+          <li>Auto-zoom: 10-300%</li>
         </ul>
       </div>
       
@@ -201,18 +252,20 @@
         <p>Rotates within defined range. Great for reveals.</p>
         <ul>
           <li>Range: 10-360°</li>
-          <li>5 easing modes</li>
-          <li>Smooth transitions</li>
+          <li>5 easing modes (Linear, Ease In/Out, Sine)</li>
+          <li>Smooth direction transitions</li>
+          <li>Speed and smoothness controls</li>
         </ul>
       </div>
       
       <div class="box">
         <h3><span class="badge">Follow Me</span>Viewport Copy</h3>
-        <p>Records your viewport movements with delay. Needs 2+ windows.</p>
+        <p>Records your viewport movements with delay.</p>
         <ul>
-          <li>Hold time: 0.1-5 sec</li>
-          <li>Travel time: 0.3-10 sec</li>
-          <li>Smooth camera paths</li>
+          <li>Hold time: 0.1-5 sec (wait before recording angle)</li>
+          <li>Travel time: 0.3-10 sec (smooth transition speed)</li>
+          <li>Needs 2+ viewport windows</li>
+          <li>Works in any editing mode</li>
         </ul>
       </div>
     </section>
@@ -221,19 +274,35 @@
     <section id="guide" style="display:none;">
       <h1>Quick Guide</h1>
       
-      <h2>Recording</h2>
+      <h2>Recording Workflow</h2>
       <ol>
+        <li><strong>Create recording viewport:</strong> Click button or split manually</li>
         <li><strong>Select mode:</strong> Orbit / Ping-Pong / Follow Me</li>
         <li><strong>Adjust settings:</strong> Speed, smoothness, tracking</li>
+        <li><strong>Configure output:</strong> Resolution, video mode, FPS</li>
         <li><strong>Preview:</strong> Test before recording</li>
         <li><strong>Record:</strong> Press ESC to stop</li>
+        <li><strong>Cleanup:</strong> Remove extra viewports when done</li>
       </ol>
       
       <h2>Key Settings</h2>
       <p><strong>Speed:</strong> Rotation speed (degrees/sec)</p>
       <p><strong>Smoothness:</strong> Camera interpolation (0.01-1.0)</p>
-      <p><strong>Track Selection:</strong> Follow selected objects/faces</p>
+      <p><strong>Track Selection:</strong> Follow selected objects/faces/edges</p>
       <p><strong>Auto Zoom:</strong> Adjust distance automatically</p>
+      
+      <h2>Resolution Settings</h2>
+      <p>Choose output resolution in Settings:</p>
+      <ul>
+        <li><strong>Viewport:</strong> Uses current viewport size</li>
+        <li><strong>Active Camera:</strong> Matches camera resolution</li>
+        <li><strong>Presets:</strong> HD 720p, Full HD 1080p, 2K, 4K, Reel (1080x1920)</li>
+        <li><strong>Custom:</strong> Set specific width × height</li>
+      </ul>
+      
+      <div class="tip">
+        <strong>💡 Frame Guide:</strong> Enable overlay to see exact recording area in viewport
+      </div>
       
       <h2>Export Options</h2>
       <p>Click Settings button:</p>
@@ -246,7 +315,7 @@
       </ul>
       
       <div class="tip">
-        <strong>💡 Best Settings:</strong> Speed 2-5°/sec, Smoothness 0.2-0.4, Quality Medium
+        <strong>💡 Best Settings:</strong> Speed 2-5°/sec, Smoothness 0.2-0.4, Quality Medium, 1080p
       </div>
       
       <h2>Output Files</h2>
@@ -267,42 +336,71 @@
       
       <h3>No Frames Captured</h3>
       <ul>
-        <li>Check 3D viewport is active</li>
-        <li>Verify write permissions</li>
-        <li>Check disk space</li>
+        <li>Ensure recording viewport is visible</li>
+        <li>Check write permissions to output folder</li>
+        <li>Verify disk space available</li>
+        <li>Recording viewport must not be minimized</li>
       </ul>
       
       <h3>Choppy Video</h3>
       <ul>
         <li>Increase smoothness (0.3-0.5)</li>
         <li>Lower rotation speed</li>
-        <li>Use higher FPS</li>
+        <li>Use higher FPS output</li>
+        <li>Reduce viewport shading complexity</li>
       </ul>
       
       <h3>Follow Me Not Working</h3>
       <ul>
-        <li>Need 2+ viewport windows</li>
-        <li>Hold view for full delay time</li>
-        <li>Recording window must be separate</li>
+        <li>Need 2+ viewport windows open</li>
+        <li>Hold view still for full delay time</li>
+        <li>Recording window must be separate from work window</li>
+        <li>Don't move view during hold time</li>
+      </ul>
+      
+      <h3>Wrong Resolution Output</h3>
+      <ul>
+        <li>Enable frame guide to preview recording area</li>
+        <li>Check resolution mode setting</li>
+        <li>For custom sizes, verify width/height values</li>
+        <li>Viewport mode uses actual viewport size</li>
       </ul>
       
       <h3>Performance Issues</h3>
       <ul>
-        <li>Use solid shading, not rendered</li>
-        <li>Close unused apps</li>
-        <li>Record shorter clips</li>
+        <li>Use solid shading instead of rendered</li>
+        <li>Close unused applications</li>
+        <li>Record at lower resolutions first</li>
         <li>Reduce viewport size</li>
+        <li>Disable overlays in recording viewport</li>
+      </ul>
+      
+      <h3>Can't Remove Recording Viewport</h3>
+      <ul>
+        <li>Use "Remove Extra Viewports" button</li>
+        <li>Or manually: Right-click viewport edge → Join Area</li>
+        <li>Drag cursor into viewport to keep</li>
       </ul>
       
       <div class="warn">
         <strong>⚠️ Still stuck?</strong> Check Blender console (Window → Toggle System Console) for errors.
       </div>
+      
+      <h2>Tips & Best Practices</h2>
+      <ul>
+        <li>Always use "Create Recording Viewport" for automatic setup</li>
+        <li>Keep recording viewport small but visible</li>
+        <li>Enable frame guide when setting up shots</li>
+        <li>Test with Preview before recording</li>
+        <li>Use Viewport mode for quick tests, presets for final output</li>
+        <li>Settings are saved automatically</li>
+      </ul>
     </section>
   </main>
 
   <script>
     function show(id) {
-      ['install','modes','guide','help'].forEach(s => {
+      ['install','setup','modes','guide','help'].forEach(s => {
         const el = document.getElementById(s);
         if(el) el.style.display = s === id ? 'block' : 'none';
       });
